@@ -18,7 +18,7 @@ export default function Home() {
     <main className="min-h-screen bg-white text-gray-800 font-sans">
       <header className="flex items-center px-6 py-4">
         <Image
-          src="/images/App-Forge-Solutions.png"
+          src="/App-Forge-Solutions/images/App-Forge-Solutions.png"
           alt="App Forge Solutions Logo"
           width={40}
           height={40}
