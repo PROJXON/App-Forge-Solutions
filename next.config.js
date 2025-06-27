@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
-const config = {
+const nextConfig = {
   reactStrictMode: true,
-  // other config options
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
+  basePath: '/App-Forge-Solutions',
+  assetPrefix: '/App-Forge-Solutions/',
 };
 
-module.exports = config;
+module.exports = nextConfig;
