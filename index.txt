@@ -1,5 +1,5 @@
 1:HL["/App-Forge-Solutions/_next/static/css/ae94e285e49bdbac.css","style",{"crossOrigin":""}]
-0:["43Sahi0uvHao62JiMRY3G",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/App-Forge-Solutions/_next/static/css/ae94e285e49bdbac.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
+0:["AcYDtVlyVUGNxSNGMyINi",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/App-Forge-Solutions/_next/static/css/ae94e285e49bdbac.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
 4:I[6954,[],""]
 5:I[7264,[],""]
 7:I[8297,[],""]
