@@ -126,6 +126,49 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Meet the Team */}
+          <section id="team" className="py-20 px-6 bg-white text-center">
+            <h2 className="text-3xl font-semibold mb-10" data-aos="fade-up">Meet the Team</h2>
+            <div className="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+              {[
+                {
+                  name: "First Last",
+                  role: "CEO",
+                  email: "first.last@afs.com",
+                  image: "/images/blank-profile-picture.webp"
+                },
+                {
+                  name: "First Last",
+                  role: "Lead Developer",
+                  email: "first.last@afs.com",
+                  image: "/images/blank-profile-picture.webp"
+                },
+                {
+                  name: "First Last",
+                  role: "Project Manager",
+                  email: "first.last@afs.com",
+                  image: "/images/blank-profile-picture.webp"
+                },
+              ].map(({ name, role, email, image }, i) => (
+                <div
+                  key={name}
+                  className="flex flex-col items-center space-y-4"
+                  data-aos="fade-up"
+                  data-aos-delay={i * 100}
+                >
+                  <img
+                  src={image}
+                  alt={name}
+                  className="w-24 h-24 rounded-full object-cover shadow-md"
+                   />
+                  <h3 className="text-xl font-bold">{name}</h3>
+                  <p className="text-gray-600">{role}</p>
+                  <p className="text-sm text-gray-600">{email}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* Contact */}
           <section id="contact" className="py-20 px-6 text-center">
             <h2 className="text-3xl font-semibold mb-4" data-aos="fade-up">Ready to Get Started?</h2>
@@ -185,6 +228,7 @@ export default function Home() {
       <div className="flex flex-col space-y-6 text-sm">
         <a href="#how" className="hover:text-orange-400 transition">How It Works</a>
         <a href="#why" className="hover:text-orange-400 transition">Why AFS</a>
+        <a href="#team" className="hover:text-orange-400 transition">Meet the Team</a>
         <a href="#contact" className="hover:text-orange-400 transition">Get Started</a>
       </div>
       <a
