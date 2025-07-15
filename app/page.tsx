@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <div className="flex">
-      <main className="flex-1 min-h-screen bg-white text-gray-800 font-sans pr-48">
+      <main className="flex-1 min-h-screen bg-white text-gray-800 font-sans md:pr-48 pr-0">
         <div id="top">
           {/* Header */}
           <header className="flex items-center px-6 py-4">
@@ -243,7 +243,7 @@ export default function Home() {
     </nav>
     {/* Mobile Navigation */}
     <div className="fixed top-4 right-4 z-50 md:hidden">
-      <Hamburger toggled={isOpen} toggle={setIsOpen} />
+      <Hamburger toggled={isOpen} toggle={setIsOpen} color="#D97706"/>
     </div>
 
     {isOpen && (
