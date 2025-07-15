@@ -1,5 +1,5 @@
 1:HL["/App-Forge-Solutions/_next/static/css/55c9187f7576890f.css","style",{"crossOrigin":""}]
-0:["pyo-uJshmq5KHV48gFTdn",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/App-Forge-Solutions/_next/static/css/55c9187f7576890f.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
+0:["BUc61th5TzyF_FOZ1IwTj",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/App-Forge-Solutions/_next/static/css/55c9187f7576890f.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
 4:HL["/App-Forge-Solutions/_next/static/css/65aa3619a1925c9d.css","style",{"crossOrigin":""}]
 5:I[6954,[],""]
 6:I[7264,[],""]
