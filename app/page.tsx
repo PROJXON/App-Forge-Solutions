@@ -14,6 +14,8 @@ import {
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { Sling as Hamburger } from 'hamburger-react';
+import { useState } from 'react';
 
 const reasons: [string, string, React.ElementType][] = [
   ["Flexible", "We work how you work", Handshake],
@@ -35,6 +37,7 @@ export default function Home() {
   }, []);
 
   const prefix = process.env.NODE_ENV === "production" ? "/App-Forge-Solutions" : "";
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex">
@@ -224,7 +227,7 @@ export default function Home() {
         </div>
       </main>
      {/* Sidebar Navigation */}
-    <nav className="flex flex-col justify-between fixed right-0 top-0 h-screen bg-gray-800 text-white w-48 px-4 py-10 z-50">
+    <nav className="hidden md:flex flex-col justify-between fixed right-0 top-0 h-screen bg-gray-800 text-white w-48 px-4 py-10 z-50">
       <div className="flex flex-col space-y-6 text-sm">
         <a href="#how" className="hover:text-orange-400 transition">How It Works</a>
         <a href="#why" className="hover:text-orange-400 transition">Why AFS</a>
@@ -238,6 +241,19 @@ export default function Home() {
         ↑ Top
       </a>
     </nav>
+    {/* Mobile Navigation */}
+    <div className="fixed top-4 right-4 z-50 md:hidden">
+      <Hamburger toggled={isOpen} toggle={setIsOpen} />
+    </div>
+
+    {isOpen && (
+      <div className="transition-all duration-300 ease-in-out fixed top-16 right-4 bg-gray-800 text-white rounded-xl shadow-xl p-6 space-y-4 md:hidden z-40 w-52">
+        <a href="#how" className="block hover:text-orange-400" onClick={() => setIsOpen(false)}>How It Works</a>
+        <a href="#why" className="block hover:text-orange-400" onClick={() => setIsOpen(false)}>Why AFS</a>
+        <a href="#team" className="block hover:text-orange-400" onClick={() => setIsOpen(false)}>Meet the Team</a>
+        <a href="#contact" className="block hover:text-orange-400" onClick={() => setIsOpen(false)}>Get Started</a>
+      </div>
+    )}
   </div>
   );
 }
