@@ -72,7 +72,7 @@ export default function Home() {
           {/* Parallax Section */}
           <section
             className="relative bg-fixed bg-center bg-cover h-[60vh] flex items-center justify-center text-white"
-            style={{ backgroundImage: "url('/images/parallax-bg.jpg')" }}
+            style={{ backgroundImage: "url('${prefix}/images/parallax-bg.jpg')" }}
           >
             <div className="bg-black bg-opacity-50 p-6 rounded-lg shadow-lg text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Crafting Seamless Digital Experiences</h2>
@@ -135,19 +135,19 @@ export default function Home() {
                   name: "First Last",
                   role: "CEO",
                   email: "first.last@afs.com",
-                  image: "/images/blank-profile-picture.webp"
+                  image: "${prefix}/images/blank-profile-picture.webp"
                 },
                 {
                   name: "First Last",
                   role: "Lead Developer",
                   email: "first.last@afs.com",
-                  image: "/images/blank-profile-picture.webp"
+                  image: "${prefix}/images/blank-profile-picture.webp"
                 },
                 {
                   name: "First Last",
                   role: "Project Manager",
                   email: "first.last@afs.com",
-                  image: "/images/blank-profile-picture.webp"
+                  image: "${prefix}/images/blank-profile-picture.webp"
                 },
               ].map(({ name, role, email, image }, i) => (
                 <div
