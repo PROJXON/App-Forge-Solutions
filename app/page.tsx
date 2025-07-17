@@ -35,9 +35,32 @@ export default function Home() {
       once: true
     });
   }, []);
+  
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries.find((entry) => entry.isIntersecting);
+
+        if (visibleEntry && (visibleEntry.target as HTMLElement).id) {
+          setActiveSection((visibleEntry.target as HTMLElement).id);
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    const sectionIds = ["hero", "how", "why", "services", "process", "team", "contact"];
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const prefix = process.env.NODE_ENV === "production" ? "/App-Forge-Solutions" : "";
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex">
@@ -59,7 +82,10 @@ export default function Home() {
           <section className="py-20 px-6 text-center bg-gray-100">
             <div className="max-w-5xl mx-auto">
               <h1 className="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">
-                From concept to code, we make it happen
+                From concept to code
+              </h1>
+              <h1 className="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">
+                We make it happen
               </h1>
               <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
                 Helping solo entrepreneurs and small businesses bring their ideas to life through seamless software development
@@ -84,7 +110,7 @@ export default function Home() {
           </section>
 
           {/* How It Works */}
-          <section id="how" className="py-20 px-6 max-w-5xl mx-auto text-center">
+          <section id="how" className="py-20 px-6 max-w-5xl mx-auto text-center min-h-[70vh]">
             <h2 className="text-3xl font-semibold mb-12" data-aos="fade-up">How It Works</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="p-6 border rounded-xl shadow-md hover:shadow-lg transition-shadow" data-aos="fade-up">
@@ -106,7 +132,7 @@ export default function Home() {
           </section>
 
           {/* Why AFS */}
-          <section id="why" className="py-20 px-6 bg-gray-100">
+          <section id="why" className="py-20 px-6 bg-gray-100 min-h-[60vh]">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl font-semibold mb-10" data-aos="fade-up">
                 Why Choose App Forge Solutions?
@@ -130,29 +156,21 @@ export default function Home() {
           </section>
 
           {/* Meet the Team */}
-          <section id="team" className="py-20 px-6 bg-white text-center">
+          <section id="team" className="py-20 px-6 bg-white text-center min-h-[70vh]">
             <h2 className="text-3xl font-semibold mb-10" data-aos="fade-up">Meet the Team</h2>
-            <div className="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-5xl mx-auto">
               {[
                 {
-                  name: "First Last",
-                  role: "CEO",
-                  email: "first.last@afs.com",
-                  image: `${prefix}/images/blank-profile-picture.webp`
+                  name: "Amy Her",
+                  role: "CEO + Co-Founder",
+                  image: `${prefix}/images/Amy Her Headshot.jpeg`
                 },
                 {
-                  name: "First Last",
-                  role: "Lead Developer",
-                  email: "first.last@afs.com",
-                  image: `${prefix}/images/blank-profile-picture.webp`
+                  name: "Ronique Wright",
+                  role: "Co-Founder",
+                  image: `${prefix}/images/Ronique Wright Headshot.jpeg`
                 },
-                {
-                  name: "First Last",
-                  role: "Project Manager",
-                  email: "first.last@afs.com",
-                  image: `${prefix}/images/blank-profile-picture.webp`
-                },
-              ].map(({ name, role, email, image }, i) => (
+              ].map(({ name, role, image }, i) => (
                 <div
                   key={name}
                   className="flex flex-col items-center space-y-4"
@@ -166,14 +184,13 @@ export default function Home() {
                    />
                   <h3 className="text-xl font-bold">{name}</h3>
                   <p className="text-gray-600">{role}</p>
-                  <p className="text-sm text-gray-600">{email}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* Contact */}
-          <section id="contact" className="py-20 px-6 text-center">
+          <section id="contact" className="py-20 px-6 text-center min-h-[60vh]">
             <h2 className="text-3xl font-semibold mb-4" data-aos="fade-up">Ready to Get Started?</h2>
             <p className="mb-8" data-aos="fade-up" data-aos-delay="100">Send us a message:</p>
             <form
@@ -229,10 +246,10 @@ export default function Home() {
      {/* Sidebar Navigation */}
     <nav className="hidden md:flex flex-col justify-between fixed right-0 top-0 h-screen bg-gray-800 text-white w-48 px-4 py-10 z-50">
       <div className="flex flex-col space-y-6 text-sm">
-        <a href="#how" className="hover:text-orange-400 transition">How It Works</a>
-        <a href="#why" className="hover:text-orange-400 transition">Why AFS</a>
-        <a href="#team" className="hover:text-orange-400 transition">Meet the Team</a>
-        <a href="#contact" className="hover:text-orange-400 transition">Get Started</a>
+        <a href="#how" className={`hover:text-orange-400 transition ${activeSection === "how" ? "text-orange-500" : ""}`}>How It Works</a>
+        <a href="#why" className={`hover:text-orange-400 transition ${activeSection === "why" ? "text-orange-500" : ""}`}>Why AFS</a>
+        <a href="#team" className={`hover:text-orange-400 transition ${activeSection === "team" ? "text-orange-500" : ""}`}>Meet the Team</a>
+        <a href="#contact" className={`hover:text-orange-400 transition ${activeSection === "contact" ? "text-orange-500" : ""}`}>Get Started</a>
       </div>
       <a
         href="#top"
