@@ -14,8 +14,6 @@ import {
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import { Sling as Hamburger } from 'hamburger-react';
-import { useState } from 'react';
 
 const reasons: [string, string, React.ElementType][] = [
   ["Flexible", "We work how you work", Handshake],
@@ -35,36 +33,12 @@ export default function Home() {
       once: true
     });
   }, []);
-  
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries.find((entry) => entry.isIntersecting);
-
-        if (visibleEntry && (visibleEntry.target as HTMLElement).id) {
-          setActiveSection((visibleEntry.target as HTMLElement).id);
-        }
-      },
-      { threshold: 0.6 }
-    );
-
-    const sectionIds = ["hero", "how", "why", "services", "process", "team", "contact"];
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   const prefix = process.env.NODE_ENV === "production" ? "/App-Forge-Solutions" : "";
 
   return (
-    <div className="flex">
-      <main className="flex-1 min-h-screen bg-white text-gray-800 font-sans md:pr-48 pr-0">
+    <div>
+      <main className="flex-1 min-h-screen bg-white text-gray-800 font-sans">
         <div id="top">
           {/* Header */}
           <header className="flex items-center px-6 py-4">
@@ -79,7 +53,7 @@ export default function Home() {
           </header>
 
           {/* Hero Section */}
-          <section className="py-20 px-6 text-center bg-gray-100">
+          <section className="px-6 py-20 text-center bg-gray-100">
             <div className="max-w-5xl mx-auto">
               <h1 className="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">
                 From concept to code
@@ -100,7 +74,7 @@ export default function Home() {
 
           {/* Parallax Section */}
           <section
-            className="relative bg-fixed bg-center bg-cover h-[60vh] flex items-center justify-center text-white"
+            className="relative bg-fixed bg-center bg-cover h-[60vh] md:h-[50vh] flex items-center justify-center text-white"
             style={{ backgroundImage: `url('${prefix}/images/parallax-bg.jpg')` }}
           >
             <div className="bg-black bg-opacity-50 p-6 rounded-lg shadow-lg text-center">
@@ -110,8 +84,9 @@ export default function Home() {
           </section>
 
           {/* How It Works */}
-          <section id="how" className="py-20 px-6 max-w-5xl mx-auto text-center min-h-[70vh]">
-            <h2 className="text-3xl font-semibold mb-12" data-aos="fade-up">How It Works</h2>
+          <section id="how" className="px-6 py-20 text-center">
+            <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-10" data-aos="fade-up">How It Works</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="p-6 border rounded-xl shadow-md hover:shadow-lg transition-shadow" data-aos="fade-up">
                 <MessageSquare className="mx-auto mb-4 text-orange-500 w-8 h-8" />
@@ -129,10 +104,11 @@ export default function Home() {
                 <p>Move forward with App Forge Solutions or use the plan to build with your own team</p>
               </div>
             </div>
+            </div>
           </section>
 
           {/* Why AFS */}
-          <section id="why" className="py-20 px-6 bg-gray-100 min-h-[60vh]">
+          <section id="why" className="px-6 py-20 bg-gray-100">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl font-semibold mb-10" data-aos="fade-up">
                 Why Choose App Forge Solutions?
@@ -156,19 +132,20 @@ export default function Home() {
           </section>
 
           {/* Meet the Team */}
-          <section id="team" className="py-20 px-6 bg-white text-center min-h-[70vh]">
+          <section id="team" className="px-6 py-20 bg-white text-center">
+            <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-semibold mb-10" data-aos="fade-up">Meet the Team</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
               {[
                 {
-                  name: "Amy Her",
-                  role: "CEO + Co-Founder",
-                  image: `${prefix}/images/Amy Her Headshot.jpeg`
+                  name: "Name",
+                  role: "Role",
+                  image: `${prefix}/images/blank-profile-picture.webp`
                 },
                 {
-                  name: "Ronique Wright",
-                  role: "Co-Founder",
-                  image: `${prefix}/images/Ronique Wright Headshot.jpeg`
+                  name: "Name",
+                  role: "Role",
+                  image: `${prefix}/images/blank-profile-picture.webp`
                 },
               ].map(({ name, role, image }, i) => (
                 <div
@@ -187,10 +164,12 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            </div>
           </section>
 
           {/* Contact */}
-          <section id="contact" className="py-20 px-6 text-center min-h-[60vh]">
+          <section id="contact" className="px-6 py-20 text-center">
+            <div className="max-w-4xl md:max-w-5xl mx-auto">
             <h2 className="text-3xl font-semibold mb-4" data-aos="fade-up">Ready to Get Started?</h2>
             <p className="mb-8" data-aos="fade-up" data-aos-delay="100">Send us a message:</p>
             <form
@@ -228,49 +207,14 @@ export default function Home() {
                 Send Message
               </button>
             </form>
+            </div>
           </section>
-
-          {/* Back to Top */}
-          <a
-            href="#top"
-            className="fixed bottom-6 right-6 bg-orange-600 text-white p-3 rounded-full shadow-lg hover:bg-orange-700 transition md:block hidden z-50"
-          >
-            ↑ Top
-          </a>
 
           <footer className="py-6 text-center text-sm text-gray-500">
             © {new Date().getFullYear()} App Forge Solutions. All rights reserved.
           </footer>
         </div>
       </main>
-     {/* Sidebar Navigation */}
-    <nav className="hidden md:flex flex-col justify-between fixed right-0 top-0 h-screen bg-gray-800 text-white w-48 px-4 py-10 z-50">
-      <div className="flex flex-col space-y-6 text-sm">
-        <a href="#how" className={`hover:text-orange-400 transition ${activeSection === "how" ? "text-orange-500" : ""}`}>How It Works</a>
-        <a href="#why" className={`hover:text-orange-400 transition ${activeSection === "why" ? "text-orange-500" : ""}`}>Why AFS</a>
-        <a href="#team" className={`hover:text-orange-400 transition ${activeSection === "team" ? "text-orange-500" : ""}`}>Meet the Team</a>
-        <a href="#contact" className={`hover:text-orange-400 transition ${activeSection === "contact" ? "text-orange-500" : ""}`}>Get Started</a>
-      </div>
-      <a
-        href="#top"
-        className="bg-orange-600 hover:bg-orange-700 text-center py-2 rounded text-sm transition"
-      >
-        ↑ Top
-      </a>
-    </nav>
-    {/* Mobile Navigation */}
-    <div className="fixed top-4 right-4 z-50 md:hidden">
-      <Hamburger toggled={isOpen} toggle={setIsOpen} color="#D97706"/>
-    </div>
-
-    {isOpen && (
-      <div className="transition-all duration-300 ease-in-out fixed top-16 right-4 bg-gray-800 text-white rounded-xl shadow-xl p-6 space-y-4 md:hidden z-40 w-52">
-        <a href="#how" className="block hover:text-orange-400" onClick={() => setIsOpen(false)}>How It Works</a>
-        <a href="#why" className="block hover:text-orange-400" onClick={() => setIsOpen(false)}>Why AFS</a>
-        <a href="#team" className="block hover:text-orange-400" onClick={() => setIsOpen(false)}>Meet the Team</a>
-        <a href="#contact" className="block hover:text-orange-400" onClick={() => setIsOpen(false)}>Get Started</a>
-      </div>
-    )}
   </div>
   );
 }
