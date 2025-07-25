@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   try {
     const response = await resend.emails.send({
       from: 'App Forge Solutions <contact@appforgesolutions.com>',
-      to: 'amy@appforgesolutions.com',
+      to: 'admin@appforgesolutions.com',
       subject: 'New Contact Form Submission',
       replyTo: email,
       html: `
