@@ -210,7 +210,15 @@ export default function Home() {
             </div>
           </section>
 
-          <footer className="py-6 text-center text-sm text-gray-500">
+          <footer className="py-6 text-center text-sm text-gray-500 flex flex-col items-center gap-1">
+            <a
+              href="https://projxon.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-gray-700"
+            >
+              Powered by Projxon
+            </a>
             © {new Date().getFullYear()} App Forge Solutions. All rights reserved.
           </footer>
         </div>
