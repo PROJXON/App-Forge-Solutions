@@ -131,42 +131,6 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Meet the Team */}
-          <section id="team" className="px-6 py-20 bg-white text-center">
-            <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-10" data-aos="fade-up">Meet the Team</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-              {[
-                {
-                  name: "Name",
-                  role: "Role",
-                  image: `${prefix}/images/blank-profile-picture.webp`
-                },
-                {
-                  name: "Name",
-                  role: "Role",
-                  image: `${prefix}/images/blank-profile-picture.webp`
-                },
-              ].map(({ name, role, image }, i) => (
-                <div
-                  key={name}
-                  className="flex flex-col items-center space-y-4"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 100}
-                >
-                  <img
-                  src={image}
-                  alt={name}
-                  className="w-24 h-24 rounded-full object-cover shadow-md"
-                   />
-                  <h3 className="text-xl font-bold">{name}</h3>
-                  <p className="text-gray-600">{role}</p>
-                </div>
-              ))}
-            </div>
-            </div>
-          </section>
-
           {/* Contact */}
           <section id="contact" className="px-6 py-20 text-center">
             <div className="max-w-4xl md:max-w-5xl mx-auto">
@@ -217,7 +181,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="underline hover:text-gray-700"
             >
-              Powered by Projxon
+              Partnered with PROJXON
             </a>
             © {new Date().getFullYear()} App Forge Solutions. All rights reserved.
           </footer>
