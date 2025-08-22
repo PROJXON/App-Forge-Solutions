@@ -24,7 +24,6 @@ const reasons: [string, string, React.ElementType][] = [
   ["Community", "Uplifting those we serve and those we work with", Users]
 ];
 
-
 export default function Home() {
   useEffect(() => {
     AOS.init({
