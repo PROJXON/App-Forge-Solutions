@@ -33,7 +33,10 @@ export default function Home() {
     });
   }, []);
 
-  const prefix = process.env.NODE_ENV === "production" ? "/App-Forge-Solutions" : "";
+  // const prefix = process.env.NODE_ENV === "production" ? "/App-Forge-Solutions" : "";
+  const isGhPages = process.env.DEPLOY_TARGET === "ghpages";
+  const prefix = isGhPages ? "/App-Forge-Solutions" : "";
+
 
   return (
     <div>
