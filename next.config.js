@@ -1,14 +1,14 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production';
+const isGhPages = process.env.DEPLOY_TARGET === 'ghpages';
+const repoBasePath = '/App-Forge-Solutions';
 
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
-  images: {
-    unoptimized: true,
-  },
-  basePath: isProd ? '/App-Forge-Solutions' : '',
-  assetPrefix: isProd ? '/App-Forge-Solutions/' : '',
+  output: isGhPages ? 'export' : 'standalone',
+  images: { unoptimized: true },
+  trailingSlash: true,
+  basePath: isGhPages ? repoBasePath : undefined,
+  assetPrefix: isGhPages ? `${repoBasePath}/` : undefined,
 };
 
 module.exports = nextConfig;

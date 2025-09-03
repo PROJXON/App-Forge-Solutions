@@ -1,7 +1,7 @@
 // app/api/contact/route.ts
 import { Resend } from 'resend';
 
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 export async function POST(req: Request) {
   const body = await req.json();
