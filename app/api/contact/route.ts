@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
   try {
     const response = await resend.emails.send({
-      from: 'App Forge Solutions <contact@appforgesolutions.com>',
+      from: 'Acme <onboarding@resend.dev>',
       to: 'admin@appforgesolutions.com',
       subject: 'New Contact Form Submission',
       replyTo: email,
