@@ -11,6 +11,7 @@ import {
   ClipboardList,
   Hammer
 } from "lucide-react";
+import emailjs from "@emailjs/browser";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -33,7 +34,6 @@ export default function Home() {
     });
   }, []);
 
-  // const prefix = process.env.NODE_ENV === "production" ? "/App-Forge-Solutions" : "";
   const isGhPages = process.env.DEPLOY_TARGET === "ghpages";
   const prefix = isGhPages ? "/App-Forge-Solutions" : "";
 
@@ -145,29 +145,25 @@ export default function Home() {
               onSubmit={async (e) => {
                 e.preventDefault();
                 const form = e.target as HTMLFormElement;
-                const formData = new FormData(form);
-                const body = {
-                  name: formData.get("name"),
-                  email: formData.get("email"),
-                  message: formData.get("message"),
-                };
 
-                const res = await fetch("/api/contact", {
-                  method: "POST",
-                  body: JSON.stringify(body),
-                  headers: { "Content-Type": "application/json" }
-                });
+                try {
+                  await emailjs.sendForm(
+                    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                    process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+                    form,
+                    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+                  );
 
-                if (res.ok) {
                   alert("Message sent!");
                   form.reset();
-                } else {
+                } catch (error) {
+                  console.error("EmailJS error:", error);
                   alert("Something went wrong. Please try again.");
                 }
               }}
             >
-              <input name="name" type="text" required placeholder="Your Name" className="w-full bg-white text-black border-b border-gray-300 focus:border-orange-500 outline-none py-2 transition-colors" />
-              <input name="email" type="email" required placeholder="Your Email" className="w-full bg-white text-black border-b border-gray-300 focus:border-orange-500 outline-none py-2 transition-colors" />
+              <input name="from_name" type="text" required placeholder="Your Name" className="w-full bg-white text-black border-b border-gray-300 focus:border-orange-500 outline-none py-2 transition-colors" />
+              <input name="reply_to" type="email" required placeholder="Your Email" className="w-full bg-white text-black border-b border-gray-300 focus:border-orange-500 outline-none py-2 transition-colors" />
               <textarea name="message" required placeholder="Your Message" rows={5} className="w-full bg-white text-black border-b border-gray-300 focus:border-orange-500 outline-none py-2 transition-colors resize-none" />
               <button type="submit" className="bg-orange-600 text-white px-6 py-3 rounded-full text-lg hover:bg-orange-700 transition">
                 Send Message
