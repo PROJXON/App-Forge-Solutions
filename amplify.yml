@@ -8,7 +8,6 @@ frontend:
         - npm ci
     build:
       commands:
-        - echo "DEPLOY_TARGET=amplify" >> .env
         - npm run build
   artifacts:
     baseDirectory: .next

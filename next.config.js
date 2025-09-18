@@ -1,14 +1,25 @@
 /** @type {import('next').NextConfig} */
-const isGhPages = process.env.DEPLOY_TARGET === 'ghpages';
-const repoBasePath = '/App-Forge-Solutions';
+const deployTarget = process.env.DEPLOY_TARGET;
 
-const nextConfig = {
+let nextConfig = {
   reactStrictMode: true,
-  output: isGhPages ? 'export' : 'standalone',
+  output: deployTarget === 'ghpages' ? 'export' : 'standalone',
   images: { unoptimized: true },
   trailingSlash: true,
-  basePath: isGhPages ? repoBasePath : undefined,
-  assetPrefix: isGhPages ? `${repoBasePath}/` : undefined,
 };
+
+// Handle GitHub Pages build
+if (deployTarget === 'ghpages') {
+  const repoBasePath = '/App-Forge-Solutions';
+  nextConfig.basePath = repoBasePath;
+  nextConfig.assetPrefix = `${repoBasePath}/`;
+}
+
+// Handle Amplify build under /business-portfolio
+if (deployTarget === 'amplify-business') {
+  const subPath = '/business-portfolio';
+  nextConfig.basePath = subPath;
+  nextConfig.assetPrefix = `${subPath}/`;
+}
 
 module.exports = nextConfig;
