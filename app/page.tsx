@@ -15,6 +15,7 @@ import emailjs from "@emailjs/browser";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import Image from "next/image";
 
 const reasons: [string, string, React.ElementType][] = [
   ["Flexible", "We work how you work", Handshake],
@@ -34,9 +35,7 @@ export default function Home() {
     });
   }, []);
 
-  const isGhPages = process.env.DEPLOY_TARGET === "ghpages";
-  const prefix = isGhPages ? "/App-Forge-Solutions" : "";
-
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   return (
     <div>
@@ -44,11 +43,12 @@ export default function Home() {
         <div id="top">
           {/* Header */}
           <header className="flex items-center px-6 py-4">
-            <img
-              src={`${prefix}/images/App-Forge-Solutions.png`}
+            <Image
+              src={`/images/App-Forge-Solutions.png`}
               alt="App Forge Solutions Logo"
               width={40}
               height={40}
+              priority
               className="mr-5"
             />
             <span className="text-xl font-semibold text-gray-900">App Forge Solutions</span>
@@ -77,7 +77,7 @@ export default function Home() {
           {/* Parallax Section */}
           <section
             className="relative bg-fixed bg-center bg-cover h-[60vh] md:h-[50vh] flex items-center justify-center text-white"
-            style={{ backgroundImage: `url('${prefix}/images/parallax-bg.jpg')` }}
+            style={{ backgroundImage: `url('${basePath}/images/parallax-bg.jpg')` }}
           >
             <div className="bg-black bg-opacity-50 p-6 rounded-lg shadow-lg text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Crafting Seamless Digital Experiences</h2>

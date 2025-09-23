@@ -1,25 +1,15 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
 const deployTarget = process.env.DEPLOY_TARGET;
+const isGhPages = deployTarget === 'ghpages';
+const isSubpath = deployTarget === 'cloudfront-subpath';
+const repoBasePath = '/App-Forge-Solutions';
+const subpath = '/business-app';
 
-let nextConfig = {
+module.exports = {
   reactStrictMode: true,
-  output: deployTarget === 'ghpages' ? 'export' : 'standalone',
+  output: isGhPages ? 'export' : 'standalone',
   images: { unoptimized: true },
-  trailingSlash: true,
+  basePath: isGhPages ? repoBasePath : (isSubpath ? subpath : undefined),
+  assetPrefix: isGhPages ? `${repoBasePath}/` : (isSubpath ? `${subpath}/` : undefined),
 };
-
-// Handle GitHub Pages build
-if (deployTarget === 'ghpages') {
-  const repoBasePath = '/App-Forge-Solutions';
-  nextConfig.basePath = repoBasePath;
-  nextConfig.assetPrefix = `${repoBasePath}/`;
-}
-
-// Handle Amplify build under /business-portfolio
-if (deployTarget === 'amplify-business') {
-  const subPath = '/business-portfolio';
-  nextConfig.basePath = subPath;
-  nextConfig.assetPrefix = `${subPath}/`;
-}
-
-module.exports = nextConfig;
